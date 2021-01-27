@@ -1,0 +1,64 @@
+# ##### TYPE DEFINITIONS ##########
+type User @model {
+  id: ID!
+  userName: String!
+  name: String!
+  password: String!
+  applications: [ID]!
+    @connection(keyName: "application", fields: ["id"])
+    #INFO: Do not change the connection. If the connection needs to be changed, create a new one that implements the pattern
+}
+
+type Application @model @key(name: "application", fields: ["id"]) {
+  id: ID!
+  jobTitle: String!
+  company: String!
+  applicationDate: String!
+  companyResponse: Boolean
+}
+
+#  ####### QUERIES #######
+type Query{
+  getUser(userName:String! password:String!):User
+  getAllApplications():[Application]!
+  getApplication(id:ID!):Application
+}
+
+# #### MUTATIONS ######
+type Mutation{
+  createUser(input: createUserInput!):User!
+  updateUser(input: updateUserInput!):User!
+  deleteUser(id: ID!): Boolean!
+  createJobApp(input: createJobAppInput!):Application!
+  updateApp(input: updateJobAppInput!):Application!
+  deleteApp(id: ID!):Boolean!
+}
+
+# #### INPUTS #####
+input createUserInput {
+  userName: String!
+  name:String!
+  password:String!
+}
+
+input updateUserInput{
+  id: ID!
+  userName: String
+  name:String
+  password:String
+}
+
+input createJobAppInput{
+  jobTitle: String!
+  company: String!
+  applicationDate: String!
+  companyResponse: Boolean
+}
+
+input updateJobAppInput{
+  id:ID!
+  jobTitle: String
+  company: String
+  applicationDate: String
+  companyResponse: Boolean
+}
