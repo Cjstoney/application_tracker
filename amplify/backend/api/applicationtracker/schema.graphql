@@ -1,0 +1,49 @@
+# ##### TYPE DEFINITIONS ##########
+type User @model {
+  id: ID!
+  userName: String!
+  name: String!
+  password: String!
+  applications: [ID]!
+}
+
+type Application @model {
+  id: ID!
+  jobTitle: String!
+  company: String!
+  applicationDate: String!
+  companyResponse: Boolean
+}
+
+#  ####### QUERIES #######
+
+# #### MUTATIONS ######
+
+# #### INPUTS #####
+input createUserInput {
+  userName: String!
+  name: String!
+  password: String!
+}
+
+input updateUserInput {
+  id: ID!
+  userName: String
+  name: String
+  password: String
+}
+
+input createJobAppInput {
+  jobTitle: String!
+  company: String!
+  applicationDate: String!
+  companyResponse: Boolean
+}
+
+input updateJobAppInput {
+  id: ID!
+  jobTitle: String
+  company: String
+  applicationDate: String
+  companyResponse: Boolean
+}
