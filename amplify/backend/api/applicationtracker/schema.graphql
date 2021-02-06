@@ -1,25 +1,20 @@
-# ##### TYPE DEFINITIONS ##########
-type User @model {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   userName: String!
   name: String!
   password: String!
-  applications: [ID]!
+  Applications: [Application] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type Application @model {
+type Application @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   jobTitle: String!
   company: String!
   applicationDate: String!
   companyResponse: Boolean
+  userID: ID!
 }
 
-#  ####### QUERIES #######
-
-# #### MUTATIONS ######
-
-# #### INPUTS #####
 input createUserInput {
   userName: String!
   name: String!
@@ -47,3 +42,4 @@ input updateJobAppInput {
   applicationDate: String
   companyResponse: Boolean
 }
+ 
