@@ -13,7 +13,7 @@ a:hover {
   display: inline-grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 10px 0;
+  padding: 0.2rem 0;
 }
 
 .footerDate {
@@ -34,4 +34,30 @@ a:hover {
 .footerGithubLogo {
   justify-self: center;
   align-self: center;
+}
+
+/* media queries */
+@media screen and (max-width: 480px) {
+  .footerContainer {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 5% 90% 5%;
+  }
+  .footerCreatedBy {
+    grid-row: 2;
+    grid-column: 2;
+  }
+  .footerDate {
+    grid-column: 2;
+  }
+  .footerGithubLogo {
+    grid-row: 3;
+    grid-column: 2;
+  }
+
+  .footerCreatedBy,
+  .footerDate,
+  .footerGithubLogo {
+    justify-self: center;
+    align-self: center;
+  }
 }

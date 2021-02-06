@@ -28,6 +28,7 @@ function Footer(): JSX.Element {
         rel="noreferrer"
         onMouseEnter={() => setColor("#bc31ea")}
         onMouseLeave={() => setColor("#000000")}
+        className="footerGithubLogo"
       >
         <svg
           width="24"
@@ -35,7 +36,6 @@ function Footer(): JSX.Element {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="footerGithubLogo"
         >
           <g clipPath="url(#clip0)">
             <path
