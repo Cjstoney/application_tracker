@@ -1,0 +1,36 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: #bc31ea;
+}
+
+.footerContainer {
+  color: black;
+  width: 100%;
+  display: inline-grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.footerDate {
+  grid-row: 1;
+  grid-column: 1;
+}
+.footerCreatedBy {
+  grid-row: 1;
+  grid-column: 2;
+}
+.footerGithubLogo {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.footerCreatedBy,
+.footerDate,
+.footerGithubLogo {
+  justify-self: center;
+  align-self: center;
+}
