@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Login(): JSX.Element {
-  const [newUser, setSignUp] = useState<boolean>(true);
+  const [isNewUser, setSignUp] = useState<boolean>(true);
   // functions needed to handle collection of inputs and direct to the sign up or login on the backend
 
   return (
@@ -14,10 +14,12 @@ function Login(): JSX.Element {
         <label htmlFor="password">password</label>
         <input type="password"></input>
         {/* toggles confirmation of password based on state value */}
-        {!!newUser
+        {!!isNewUser
           ? [
-              <label htmlFor="passwordConfirm">confirm password</label>,
-              <input type="password"></input>,
+              <label key="confirmPWord" htmlFor="passwordConfirm">
+                confirm password
+              </label>,
+              <input key="confirmPWordInput" type="password"></input>,
             ]
           : null}
         <button>submit</button>
