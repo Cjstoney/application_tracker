@@ -43,3 +43,4 @@ amplifytools.xcconfig
 
 #cache
 .eslintcache
+.cache

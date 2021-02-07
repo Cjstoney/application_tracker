@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function Login(): JSX.Element {
   const [newUser, setSignUp] = useState<boolean>(true);
+  // functions needed to handle collection of inputs and direct to the sign up or login on the backend
 
   return (
     <div>
