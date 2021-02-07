@@ -1,8 +1,18 @@
 import { useState } from "react";
+import { validateEmail } from "./loginHelpers";
 
 function Login(): JSX.Element {
   const [isNewUser, setSignUp] = useState<boolean>(true);
+  const [payloadEmail, setEmailPayload] = useState<string>("");
   // functions needed to handle collection of inputs and direct to the sign up or login on the backend
+
+  const setEmail = (input: string) => {
+    !!validateEmail(input) ? setEmailPayload(input) : console.log("not valid");
+  };
+
+  // const setPassword = (input: string) =>{
+
+  // }
 
   return (
     <div>
@@ -10,7 +20,10 @@ function Login(): JSX.Element {
       <button onClick={() => setSignUp(false)}>Login</button>
       <div>
         <label htmlFor="email">email</label>
-        <input type="text"></input>
+        <input
+          type="text"
+          onChange={(event) => setEmail(event.target.value)}
+        ></input>
         <label htmlFor="password">password</label>
         <input type="password"></input>
         {/* toggles confirmation of password based on state value */}
