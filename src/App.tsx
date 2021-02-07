@@ -1,8 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import Footer from './components/footer/footer';
+import logo from "./logo.svg";
+import "./App.css";
+import Footer from "./components/footer/footer";
+import Amplify from "aws-amplify";
+import awsconfig from "./aws-exports";
+import Login from "./components/login/login";
 
-function App(){
+Amplify.configure(awsconfig);
+function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -19,6 +23,7 @@ function App(){
           Learn React
         </a>
       </header>
+      <Login />
       <Footer />
     </div>
   );
