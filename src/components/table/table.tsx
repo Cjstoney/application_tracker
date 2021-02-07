@@ -42,6 +42,13 @@ const Table = () => {
                 return (
                     <tr key={app.id}>
                         <td>{app.jobTitle}</td>
+                        <td>{app.company}</td>
+                        <td>{app.applicationDate}</td>
+                        <td>{app.link}</td>
+                        <td>{app.companyResponse}</td>
+                        <td>{app.followedUp}</td>
+                        <td>{app.connection}</td>
+                        <td>{app.notes}</td>
                     </tr>
                 )
             })}
