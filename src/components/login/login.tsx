@@ -1,18 +1,42 @@
 import { useState } from "react";
-import { validateEmail } from "./loginHelpers";
+import { validateEmail, comparePassword } from "./loginHelpers";
 
 function Login(): JSX.Element {
+  // component state
   const [isNewUser, setSignUp] = useState<boolean>(true);
-  const [payloadEmail, setEmailPayload] = useState<string>("");
+  const [payloadEmail, setPayloadEmail] = useState<string>("");
+  const [payloadPassword, setPayloadPassword] = useState<string>("");
+  const [confirmationPassword, setConfirmationPassword] = useState<string>("");
+
   // functions needed to handle collection of inputs and direct to the sign up or login on the backend
+  function setEmail(input: string) {
+    !!validateEmail(input) ? setPayloadEmail(input) : console.log("not valid");
+  }
 
-  const setEmail = (input: string) => {
-    !!validateEmail(input) ? setEmailPayload(input) : console.log("not valid");
-  };
+  function setPassword(input: string) {
+    // TODO:password still needs to be salted
+    setPayloadPassword(input);
+  }
+  function confirmPassword(input: string) {
+    setConfirmationPassword(input);
+  }
 
-  // const setPassword = (input: string) =>{
-
-  // }
+  function createPayload(
+    email: string,
+    password: string,
+    confirmationPassword: string
+  ) {
+    if (isNewUser) {
+      if (!comparePassword(password, confirmationPassword)) {
+        // TODO: MAKE THIS NOT AN ALERT
+        alert("passwords do not match");
+      }
+      console.log("making payloads");
+    }
+    const payload = { email, password };
+    console.log("old user Payload", payload);
+    // do the magic auth stuff here
+  }
 
   return (
     <div>
@@ -25,17 +49,30 @@ function Login(): JSX.Element {
           onChange={(event) => setEmail(event.target.value)}
         ></input>
         <label htmlFor="password">password</label>
-        <input type="password"></input>
+        <input
+          type="password"
+          onChange={(event) => setPassword(event.target.value)}
+        ></input>
         {/* toggles confirmation of password based on state value */}
         {!!isNewUser
           ? [
               <label key="confirmPWord" htmlFor="passwordConfirm">
                 confirm password
               </label>,
-              <input key="confirmPWordInput" type="password"></input>,
+              <input
+                key="confirmPWordInput"
+                type="password"
+                onChange={(event) => confirmPassword(event.target.value)}
+              ></input>,
             ]
           : null}
-        <button>submit</button>
+        <button
+          onClick={() =>
+            createPayload(payloadEmail, payloadPassword, confirmationPassword)
+          }
+        >
+          submit
+        </button>
       </div>
     </div>
   );
