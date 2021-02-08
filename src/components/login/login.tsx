@@ -10,7 +10,10 @@ function Login(): JSX.Element {
   const [confirmationPassword, setConfirmationPassword] = useState<string>("");
 
   function setEmail(input: string) {
-    !!validateEmail(input) ? setPayloadEmail(input) : console.log("not valid");
+    if (!!validateEmail(input)) {
+      setPayloadEmail(input);
+    }
+    // TODO: needs to handle a non valid email
   }
 
   function setPassword(input: string) {
@@ -48,27 +51,32 @@ function Login(): JSX.Element {
      */
     if (!!isNewUser) {
       try {
-        const { user } = await Auth.signUp({
+        await Auth.signUp({
           password,
           username: email,
+          attributes: {
+            email,
+          },
+        }).then((user) => {
+          /**
+           * Todo: assuming thing go well, redirect to the correct info here
+           */
+          console.log({ user });
         });
-        /**
-         * Todo: assuming thing go well, redirect to the correct info here
-         */
-        console.log({ user });
       } catch (error) {
         console.log("Their was an error signing you up", error);
       }
     }
     try {
-      const { user } = await Auth.signIn({
+      await Auth.signIn({
         password,
         username: email,
+      }).then((user) => {
+        /**
+         * Todo: assuming thing go well, redirect to the correct info here
+         */
+        console.log({ user });
       });
-      /**
-       * Todo: assuming thing go well, redirect to the correct info here
-       */
-      console.log({ user });
     } catch (error) {
       console.log("their was an error signing you up", error);
     }
