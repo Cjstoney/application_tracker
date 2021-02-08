@@ -1,3 +1,4 @@
+import { Auth } from "aws-amplify";
 import { useState } from "react";
 import { validateEmail, comparePassword } from "./loginHelpers";
 
@@ -8,7 +9,6 @@ function Login(): JSX.Element {
   const [payloadPassword, setPayloadPassword] = useState<string>("");
   const [confirmationPassword, setConfirmationPassword] = useState<string>("");
 
-  // functions needed to handle collection of inputs and direct to the sign up or login on the backend
   function setEmail(input: string) {
     !!validateEmail(input) ? setPayloadEmail(input) : console.log("not valid");
   }
@@ -21,22 +21,62 @@ function Login(): JSX.Element {
     setConfirmationPassword(input);
   }
 
-  function createPayload(
+  /**
+   *
+   * start logic function
+   */
+
+  async function createPayload(
     email: string,
     password: string,
     confirmationPassword: string
   ) {
-    if (isNewUser) {
+    if (!!isNewUser) {
       if (!comparePassword(password, confirmationPassword)) {
-        // TODO: MAKE THIS NOT AN ALERT
+        /**
+         * TODO: MAKE THIS NOT AN ALERT
+         * this should update a class that either turn the checkmarks red or
+         * has a message for the user
+         * */
+
         alert("passwords do not match");
       }
       console.log("making payloads");
     }
     const payload = { email, password };
     console.log("old user Payload", payload);
-    // do the magic auth stuff here
+    /**TODO:do the magic auth stuff here
+     * needs another if statement to enact either the signup of the login.
+     */
+    if (!!isNewUser) {
+      try {
+        const { user } = await Auth.signUp({
+          password,
+          username: email,
+        });
+        /**
+         * Todo: assuming thing go well, redirect to the correct info here
+         */
+      } catch (error) {
+        console.log("Their was an error signing you up", error);
+      }
+    }
+    try {
+      const { user } = await Auth.signIn({
+        password,
+        username: email,
+      });
+      /**
+       * Todo: assuming thing go well, redirect to the correct info here
+       */
+    } catch (error) {
+      console.log("their was an error signing you up", error);
+    }
   }
+
+  /**
+   * end logic functions
+   */
 
   return (
     <div>
