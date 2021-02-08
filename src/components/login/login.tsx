@@ -14,7 +14,7 @@ function Login(): JSX.Element {
   }
 
   function setPassword(input: string) {
-    // TODO:password still needs to be salted
+    // TODO:password still needs to be salted?
     setPayloadPassword(input);
   }
   function confirmPassword(input: string) {
@@ -43,10 +43,8 @@ function Login(): JSX.Element {
       }
       console.log("making payloads");
     }
-    const payload = { email, password };
-    console.log("old user Payload", payload);
-    /**TODO:do the magic auth stuff here
-     * needs another if statement to enact either the signup of the login.
+    /**
+     * check if it is a new user and then do the correct auth.
      */
     if (!!isNewUser) {
       try {
@@ -57,6 +55,7 @@ function Login(): JSX.Element {
         /**
          * Todo: assuming thing go well, redirect to the correct info here
          */
+        console.log({ user });
       } catch (error) {
         console.log("Their was an error signing you up", error);
       }
@@ -69,11 +68,11 @@ function Login(): JSX.Element {
       /**
        * Todo: assuming thing go well, redirect to the correct info here
        */
+      console.log({ user });
     } catch (error) {
       console.log("their was an error signing you up", error);
     }
   }
-
   /**
    * end logic functions
    */
