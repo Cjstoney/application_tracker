@@ -20,8 +20,9 @@ export function comparePassword(password: string, confirmationPassword: string):
   }
 
   /**
-   * 
-   * @param args 
+   * confirms if it a new user or not,
+   * checks that the passwords match and then make the api calls
+   * to login or sign up
    */
   export async function authenticateUser(args: AuthenticateUserArgs) {
     const { confirmationPassword, password, email, newUserStatus } = args;
@@ -29,7 +30,7 @@ export function comparePassword(password: string, confirmationPassword: string):
       if (!comparePassword(password, confirmationPassword)) {
         /**
          * TODO: MAKE THIS NOT AN ALERT
-         * this should update a class that either turn the checkmarks red or
+         * this should update a class that either turn the check marks red or
          * has a message for the user
          * */
 
@@ -47,7 +48,6 @@ export function comparePassword(password: string, confirmationPassword: string):
              * Todo: assuming thing go well, redirect to the correct info here
              */
             localStorage.setItem("appTrackerUser", user.userSub);
-            console.log({ user });
           });
         } catch (error) {
           console.log("Their was an error signing you up", error);
@@ -63,7 +63,6 @@ export function comparePassword(password: string, confirmationPassword: string):
            * Todo: assuming thing go well, redirect to the correct info here
            */
           localStorage.setItem("appTrackerUser", user.userSub);
-          console.log({ user });
         });
       } catch (error) {
         console.log("their was an error signing you in", error);
