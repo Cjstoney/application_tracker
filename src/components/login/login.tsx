@@ -1,6 +1,5 @@
-import { Auth } from "aws-amplify";
 import { useState } from "react";
-import { validateEmail, comparePassword } from "./loginHelpers";
+import { validateEmail, authenticateUser } from "./loginHelpers";
 
 function Login(): JSX.Element {
   // component state
@@ -17,73 +16,11 @@ function Login(): JSX.Element {
   }
 
   function setPassword(input: string) {
-    // TODO:password still needs to be salted?
     setPayloadPassword(input);
   }
   function confirmPassword(input: string) {
     setConfirmationPassword(input);
   }
-
-  /**
-   *
-   * start logic function
-   */
-
-  async function createPayload(
-    email: string,
-    password: string,
-    confirmationPassword: string
-  ) {
-    if (!!isNewUser) {
-      if (!comparePassword(password, confirmationPassword)) {
-        /**
-         * TODO: MAKE THIS NOT AN ALERT
-         * this should update a class that either turn the checkmarks red or
-         * has a message for the user
-         * */
-
-        alert("passwords do not match");
-      }
-      console.log("making payloads");
-    }
-    /**
-     * check if it is a new user and then do the correct auth.
-     */
-    if (!!isNewUser) {
-      try {
-        await Auth.signUp({
-          password,
-          username: email,
-          attributes: {
-            email,
-          },
-        }).then((user) => {
-          /**
-           * Todo: assuming thing go well, redirect to the correct info here
-           */
-          console.log({ user });
-        });
-      } catch (error) {
-        console.log("Their was an error signing you up", error);
-      }
-    }
-    try {
-      await Auth.signIn({
-        password,
-        username: email,
-      }).then((user) => {
-        /**
-         * Todo: assuming thing go well, redirect to the correct info here
-         */
-        console.log({ user });
-      });
-    } catch (error) {
-      console.log("their was an error signing you up", error);
-    }
-  }
-  /**
-   * end logic functions
-   */
 
   return (
     <div>
@@ -115,7 +52,12 @@ function Login(): JSX.Element {
           : null}
         <button
           onClick={() =>
-            createPayload(payloadEmail, payloadPassword, confirmationPassword)
+            authenticateUser({
+              email: payloadEmail,
+              password: payloadPassword,
+              confirmationPassword: confirmationPassword,
+              newUserStatus: isNewUser,
+            })
           }
         >
           submit
