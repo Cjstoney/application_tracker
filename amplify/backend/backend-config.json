@@ -8,8 +8,8 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
+              "apiKeyExpirationDays": 365,
+              "description": "api key"
             }
           },
           "additionalAuthenticationProviders": [
@@ -22,8 +22,9 @@
     }
   },
   "auth": {
-    "applicationtracker7bb9009b": {
+    "applicationtracker11d5c0a6": {
       "service": "Cognito",
+      "serviceType": "imported",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false
