@@ -44,10 +44,10 @@ export function comparePassword(password: string, confirmationPassword: string):
               email,
             },
           }).then((user) => {
+            localStorage.setItem("appTrackerUser", user.userSub);
             /**
              * Todo: assuming thing go well, redirect to the correct info here
              */
-            localStorage.setItem("appTrackerUser", user.userSub);
           });
         } catch (error) {
           console.log("Their was an error signing you up", error);
@@ -59,10 +59,10 @@ export function comparePassword(password: string, confirmationPassword: string):
           password,
           username: email,
         }).then((user) => {
+          localStorage.setItem("appTrackerUser", user.userSub);
           /**
            * Todo: assuming thing go well, redirect to the correct info here
            */
-          localStorage.setItem("appTrackerUser", user.userSub);
         });
       } catch (error) {
         console.log("their was an error signing you in", error);
