@@ -26,8 +26,7 @@ export function comparePassword(password: string, confirmationPassword: string):
    */
   export async function authenticateUser(args: AuthenticateUserArgs) {
     const { confirmationPassword, password, email, newUserStatus } = args;
-    if (!!newUserStatus) {
-      if (!comparePassword(password, confirmationPassword)) {
+   if (!!newUserStatus && !comparePassword(password, confirmationPassword)) {
         /**
          * TODO: MAKE THIS NOT AN ALERT
          * this should update a class that either turn the check marks red or
@@ -35,37 +34,41 @@ export function comparePassword(password: string, confirmationPassword: string):
          * */
 
         alert("passwords do not match");
-      } else {
+    } else if(!!newUserStatus && !!comparePassword(password, confirmationPassword)){
         try {
-          await Auth.signUp({
+        const user = await Auth.signUp({
             password,
             username: email,
             attributes: {
               email,
             },
-          }).then((user) => {
-            localStorage.setItem("appTrackerUser", user.userSub);
+          }).then((result)=>{
+            localStorage.setItem("appTrackerUser", result.userSub);
+            return result
             /**
              * Todo: assuming thing go well, redirect to the correct info here
              */
-          });
+          })
+          return user
         } catch (error) {
           console.log("Their was an error signing you up", error);
         }
-      }
-    } else {
+    }
+    else {
       try {
-        await Auth.signIn({
+        const user = await Auth.signIn({
           password,
           username: email,
-        }).then((user) => {
-          localStorage.setItem("appTrackerUser", user.userSub);
+        }).then((result) => {
+          localStorage.setItem("appTrackerUser", result.userSub);
+          return result
           /**
            * Todo: assuming thing go well, redirect to the correct info here
            */
         });
+        return user
       } catch (error) {
         console.log("their was an error signing you in", error);
-      }
+      } 
     }
   }
