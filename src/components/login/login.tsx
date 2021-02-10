@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { validateEmail, authenticateUser } from "./loginHelpers";
+import { ChevronRight } from "@material-ui/icons";
 import "./login.css";
 
 function Login(): JSX.Element {
@@ -94,6 +95,7 @@ function Login(): JSX.Element {
           }
         >
           {!!isNewUser ? "Sign Up" : "Login"}
+          <ChevronRight />
         </button>
       </div>
     </div>
