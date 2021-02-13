@@ -1,5 +1,6 @@
 import { Auth } from "aws-amplify";
 import { AuthenticateUserArgs } from "../../models/interfaces";
+import { AppEnums } from '../../models/enums'
 
 /**
  * regex to compare email string against
@@ -43,7 +44,8 @@ export function comparePassword(password: string, confirmationPassword: string):
               email,
             },
           }).then((result)=>{
-            localStorage.setItem("appTrackerUser", result.userSub);
+            console.log(result.userSub)
+            localStorage.setItem(AppEnums.AppTrackerUser, result.userSub);
             return result
             /**
              * Todo: assuming thing go well, redirect to the correct info here
@@ -51,6 +53,7 @@ export function comparePassword(password: string, confirmationPassword: string):
           })
           return user
         } catch (error) {
+          alert(`${AppEnums.SignUpError} using the credentials ${email}, ${password}`)
           console.log("Their was an error signing you up", error);
         }
     }
@@ -60,7 +63,8 @@ export function comparePassword(password: string, confirmationPassword: string):
           password,
           username: email,
         }).then((result) => {
-          localStorage.setItem("appTrackerUser", result.userSub);
+          console.log(result.userSub)
+          localStorage.setItem(AppEnums.AppTrackerUser, result.userSub);
           return result
           /**
            * Todo: assuming thing go well, redirect to the correct info here
@@ -68,6 +72,7 @@ export function comparePassword(password: string, confirmationPassword: string):
         });
         return user
       } catch (error) {
+        alert(`${AppEnums.SignUpError} using the credentials ${email}, ${password}`)
         console.log("their was an error signing you in", error);
       } 
     }
