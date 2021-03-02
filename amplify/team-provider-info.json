@@ -13,7 +13,12 @@
     },
     "categories": {
       "auth": {
-        "applicationtracker7bb9009b": {}
+        "applicationtracker11d5c0a6": {
+          "userPoolId": "us-west-2_ZA4EJp2D9",
+          "userPoolName": "ApplicationTracker2",
+          "webClientId": "6rf63s57sjk1k0i76io05t23o5",
+          "nativeClientId": "2bjsqt79ali4s6tj24v5cg6j7o"
+        }
       }
     }
   }
