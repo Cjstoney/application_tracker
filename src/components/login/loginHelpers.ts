@@ -44,7 +44,6 @@ export function comparePassword(password: string, confirmationPassword: string):
               email,
             },
           }).then((result)=>{
-            console.log(result.userSub)
             localStorage.setItem(AppEnums.AppTrackerUser, result.userSub);
             return result
             /**
@@ -63,8 +62,7 @@ export function comparePassword(password: string, confirmationPassword: string):
           password,
           username: email,
         }).then((result) => {
-          console.log(result.userSub)
-          localStorage.setItem(AppEnums.AppTrackerUser, result.userSub);
+          localStorage.setItem(AppEnums.AppTrackerUser, result.username);
           return result
           /**
            * Todo: assuming thing go well, redirect to the correct info here
