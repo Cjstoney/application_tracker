@@ -1,17 +1,12 @@
 import "./App.css";
-import Footer from "./components/footer/footer";
-import Login from "./components/login/login";
-import Table from "./components/table/table";
+import { IdentityContextProvider } from "react-netlify-identity";
 
-// this needs to set the state to either a user or false. Then conditionally render the correct component
-// const []
 function App() {
+  const url = "https://youthful-goodall-7241a1.netlify.app";
   return (
-    <div className="App">
-      <Table />
-      <Login />
-      <Footer />
-    </div>
+    <IdentityContextProvider url={url}>
+      <div className="App">hello word</div>
+    </IdentityContextProvider>
   );
 }
 
