@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { validateEmail, authenticateUser } from "./loginHelpers";
 import { ChevronRight } from "@material-ui/icons";
 import "./login.css";
 
@@ -10,12 +9,7 @@ function Login(): JSX.Element {
   const [payloadPassword, setPayloadPassword] = useState<string>("");
   const [confirmationPassword, setConfirmationPassword] = useState<string>("");
 
-  function setEmail(input: string) {
-    if (!!validateEmail(input)) {
-      setPayloadEmail(input);
-    }
-    // TODO: needs to handle a non valid email
-  }
+  function setEmail(input: string) {}
 
   function setPassword(input: string) {
     setPayloadPassword(input);
@@ -83,17 +77,7 @@ function Login(): JSX.Element {
             ></input>
           </label>
         ) : null}
-        <button
-          className="loginBtn"
-          onClick={() =>
-            authenticateUser({
-              email: payloadEmail,
-              password: payloadPassword,
-              confirmationPassword: confirmationPassword,
-              newUserStatus: isNewUser,
-            })
-          }
-        >
+        <button className="loginBtn">
           {!!isNewUser ? "Sign Up" : "Login"}
           <ChevronRight />
         </button>
