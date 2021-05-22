@@ -1,11 +1,10 @@
 import "./App.css";
 import Footer from "./components/footer/footer";
-import Amplify from "aws-amplify";
-import awsconfig from "./aws-exports";
 import Login from "./components/login/login";
 import Table from "./components/table/table";
 
-Amplify.configure(awsconfig);
+// this needs to set the state to either a user or false. Then conditionally render the correct component
+// const []
 function App() {
   return (
     <div className="App">
