@@ -1,21 +1,23 @@
-import { useState } from "react";
-import { ChevronRight } from "@material-ui/icons";
+import React, { useState } from "react";
 import "./login.css";
+import { LoginButton } from "./loginHelpers";
 
 function Login(): JSX.Element {
   // component state
   const [isNewUser, setSignUp] = useState<boolean>(true);
-  // const [payloadEmail, setPayloadEmail] = useState<string>("");
-  // const [payloadPassword, setPayloadPassword] = useState<string>("");
-  // const [confirmationPassword, setConfirmationPassword] = useState<string>("");
+  const [payloadEmail, setPayloadEmail] = useState<string>("");
+  const [payloadPassword, setPayloadPassword] = useState<string>("");
+  const [confirmationPassword, setConfirmationPassword] = useState<string>("");
 
-  function setEmail(input: string) {}
+  function setEmail(input: string) {
+    setPayloadEmail(input);
+  }
 
   function setPassword(input: string) {
-    // setPayloadPassword(input);
+    setPayloadPassword(input);
   }
   function confirmPassword(input: string) {
-    // setConfirmationPassword(input);
+    setConfirmationPassword(input);
   }
 
   return (
@@ -80,10 +82,12 @@ function Login(): JSX.Element {
             ></input>
           </label>
         ) : null}
-        <button className="loginBtn">
-          {!!isNewUser ? "Sign Up" : "Login"}
-          <ChevronRight />
-        </button>
+        <LoginButton
+          isNewUser={isNewUser}
+          email={payloadEmail}
+          password={payloadPassword}
+          confirmPassword={confirmationPassword}
+        />
       </form>
     </div>
   );

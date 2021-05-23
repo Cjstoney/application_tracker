@@ -44,3 +44,5 @@ amplifytools.xcconfig
 #cache
 .eslintcache
 .cache
+# Local Netlify folder
+.netlify
