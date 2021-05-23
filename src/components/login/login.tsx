@@ -5,17 +5,17 @@ import "./login.css";
 function Login(): JSX.Element {
   // component state
   const [isNewUser, setSignUp] = useState<boolean>(true);
-  const [payloadEmail, setPayloadEmail] = useState<string>("");
-  const [payloadPassword, setPayloadPassword] = useState<string>("");
-  const [confirmationPassword, setConfirmationPassword] = useState<string>("");
+  // const [payloadEmail, setPayloadEmail] = useState<string>("");
+  // const [payloadPassword, setPayloadPassword] = useState<string>("");
+  // const [confirmationPassword, setConfirmationPassword] = useState<string>("");
 
   function setEmail(input: string) {}
 
   function setPassword(input: string) {
-    setPayloadPassword(input);
+    // setPayloadPassword(input);
   }
   function confirmPassword(input: string) {
-    setConfirmationPassword(input);
+    // setConfirmationPassword(input);
   }
 
   return (
@@ -38,13 +38,14 @@ function Login(): JSX.Element {
       >
         Login
       </button>
-      <div className="inputContainer">
+      <form className="inputContainer">
         <label className="inputLabel loginEmail">
           Email
           <input
             className="loginInput loginEmail"
             id="loginEmailInput"
             type="text"
+            autoComplete="email@email.com"
             onChange={(event) => setEmail(event.target.value)}
           ></input>
         </label>
@@ -57,6 +58,7 @@ function Login(): JSX.Element {
             className="loginInput loginPassword"
             id="loginPasswordInput"
             type="password"
+            autoComplete="password"
             onChange={(event) => setPassword(event.target.value)}
           ></input>
         </label>
@@ -73,6 +75,7 @@ function Login(): JSX.Element {
               id="loginConfirmInput"
               key="confirmPWordInput"
               type="password"
+              autoComplete="confirm password"
               onChange={(event) => confirmPassword(event.target.value)}
             ></input>
           </label>
@@ -81,7 +84,7 @@ function Login(): JSX.Element {
           {!!isNewUser ? "Sign Up" : "Login"}
           <ChevronRight />
         </button>
-      </div>
+      </form>
     </div>
   );
 }
