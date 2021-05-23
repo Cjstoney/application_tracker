@@ -3,7 +3,7 @@ import { IdentityContextProvider } from "react-netlify-identity";
 import Login from "./components/login/login";
 
 function App() {
-  const url = "https://youthful-goodall-7241a1.netlify.app";
+  const url = "https://appllication-tracker.netlify.app";
   return (
     <IdentityContextProvider url={url}>
       {/* <div className="App">hello word</div> */}
